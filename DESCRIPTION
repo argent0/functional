@@ -1,0 +1,16 @@
+Package: functions
+Title: Usefull functions for functional R
+Date: 2016-05-06
+Version: 0.0-1
+Author: Aner Oscar Lucero
+Description: A collection of functions to facilitate a more functional style
+    of programing in R. The package provides functions to facilitate: function
+    composition, function application, lazy evaluation, defining functions and
+    persisting/recovering objects into/from the disk.
+Depends:
+    gtools
+Suggests:
+    dplyr
+Maintainer: Aner Oscar Lucero <mail.address@foo.com>
+License: GPL-2
+RoxygenNote: 5.0.1
