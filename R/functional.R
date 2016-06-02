@@ -104,6 +104,7 @@ GT <- function(i) { NOT %o% LTE(i) }
 #'
 #' @param i the rhs argument to ==
 #' @return a function of arity 1 that retutns the result of comparing its argument with i
+#' @export
 EQ <- function(i) { return (function(x) { x == i }) }
 
 #' The identity function.
