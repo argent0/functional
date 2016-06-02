@@ -82,7 +82,7 @@ uncurry <- function(f) { return(function(pair) { return(f(pair$fst, pair$snd)) }
 #' convinient functional version of <=
 #'
 #' @param i the rhs argument to <=
-#' @return a function of arity 1 that return the result of comparing its argument with i
+#' @return a function of arity 1 that returns the result of comparing its argument with i
 #' @export
 LTE <- function(i) { function(x) { x<=i} }
 
@@ -96,9 +96,15 @@ NOT <- function(i) { !i }
 #' convinient functional version of >
 #'
 #' @param i the rhs argument to >
-#' @return a function of arity 1 that return the result of comparing its argument with i
+#' @return a function of arity 1 that returns the result of comparing its argument with i
 #' @export
 GT <- function(i) { NOT %o% LTE(i) }
+
+#' convinient functional version of ==
+#'
+#' @param i the rhs argument to ==
+#' @return a function of arity 1 that retutns the result of comparing its argument with i
+EQ <- function(i) { return (function(x) { x == i }) }
 
 #' The identity function.
 #'
