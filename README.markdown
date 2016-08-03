@@ -10,3 +10,10 @@ Using devtools
 require("devtools")
 install_github("argent0/functional")
 ```
+
+### Build Documentation
+
+```R
+require("roxygen2")
+roxygenize("functional")
+```

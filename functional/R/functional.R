@@ -47,15 +47,6 @@ cmap <- function(f, d) { return(apply(d,2,f)) }
 
 selectBy  <- function(p) { return(function(x) { x %select% p }) }
 
-#' (&&&) :: (b -> c) -> (b -> c') -> (b -> (c, c'))
-#'
-#' @param f The function whos return value is the first element of the resulting pair.
-#' @param g The function whos return value is the second element of the resulting pair.
-#' @details This is the function instance's &&& of Arrow.
-#' @references Haskell's Control.Arrow
-#' @return A function of arity one that returns a pair. r(x) = (f(x), g(x))
-#' @export
-
 #' pair S3 class constructor
 #'
 #' @param f the first component
@@ -64,8 +55,19 @@ selectBy  <- function(p) { return(function(x) { x %select% p }) }
 pair <- function(f, s) { structure(list(fst=f, snd=s), class("pair")) }
 
 #' pair's as.vector method
+#' @param x the object of class pair to convert
+#' @param mode integer, character, etc...
 #' @export
-as.vector.pair <- function(p) { c(p$fst, p$snd) }
+as.vector.pair <- function(x, mode) { c(x$fst, x$snd) }
+
+#' (&&&) :: (b -> c) -> (b -> c') -> (b -> (c, c'))
+#'
+#' @param f The function whos return value is the first element of the resulting pair.
+#' @param g The function whos return value is the second element of the resulting pair.
+#' @details This is the function instance's &&& of Arrow.
+#' @references Haskell's Control.Arrow
+#' @return A function of arity one that returns a pair. r(x) = (f(x), g(x))
+#' @export
 
 '%&&&%' <- function(f, g) {return(function(arg) { pair(f(arg), g(arg))})}
 
@@ -77,7 +79,7 @@ as.vector.pair <- function(p) { c(p$fst, p$snd) }
 #' @references Haskell's Control.Arrow
 #' @return A function of arity one, whith an argument that must be a pair, that returns a pair. r((a,b)) = (f(a), g(b))
 #' @export
-'%***%' <- function(f, g) {return(function(arg) {pair( f(arg$fst), g(arg$snd))}}
+'%***%' <- function(f, g) {return(function(arg) {pair( f(arg$fst), g(arg$snd))})}
 
 #' Generates function that takes a pair as argument
 #'
