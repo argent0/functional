@@ -52,7 +52,7 @@ selectBy  <- function(p) { return(function(x) { x %select% p }) }
 #' @param f the first component
 #' @param s the second component
 #' @export
-pair <- function(f, s) { structure(list(fst=f, snd=s), class("pair")) }
+pair <- function(f, s) { structure(list(fst=f, snd=s), class = "pair") }
 
 #' pair's as.vector method
 #' @param x the object of class pair to convert
