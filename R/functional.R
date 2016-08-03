@@ -142,9 +142,16 @@ const <- defmacro(v, expr= function() { return(v) })
 #' time this function is called the computation v is performed and its value stored
 #' in memory to be recalled upon succesive calls.
 #' @export
-lazy <- defmacro(v, expr= .lazy(function() {return(v)}))
+lazy <- defmacro(v, expr= lazy_(function() {return(v)}))
 
-.lazy <- function(e, msg="") {
+#' creates a lazy value
+#'
+#' @param e the expression that should be computed only when required
+#' @details You should use \code{lazy}. The value is computed only once and reused upon succesive calls.
+#' @seealso lazy
+#' @details The value is computed only once and reused upon succesive calls.
+#' @export
+lazy_ <- function(e, msg="") {
 	done <- FALSE
 	value  <- NULL
 	return(function() {
@@ -194,7 +201,7 @@ if (!(dir.exists(persistedLocation))) {
 	if (file.exists(filepath)) {
 		return(.lazyLoad(varname, filepath))
 	} else {
-		return(.lazy(function() {
+		return(lazy_(function() {
 			cat("PERSISTING :", varname, "...")
 			env <- parent.frame()
 			env[[varname]] <- e()
