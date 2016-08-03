@@ -56,9 +56,18 @@ selectBy  <- function(p) { return(function(x) { x %select% p }) }
 #' @return A function of arity one that returns a pair. r(x) = (f(x), g(x))
 #' @export
 
-'%&&&%' <- function(f, g) {
-	return(function(arg) { list(fst= f(arg), snd=g(arg)) })
-}
+#' pair S3 class constructor
+#'
+#' @param f the first component
+#' @param s the second component
+#' @export
+pair <- function(f, s) { structure(list(fst=f, snd=s), class("pair")) }
+
+#' pair's as.vector method
+#' @export
+as.vector.pair <- function(p) { c(p$fst, p$snd) }
+
+'%&&&%' <- function(f, g) {return(function(arg) { pair(f(arg), g(arg))})}
 
 #' (***) :: (a -> c) -> (a' -> c') -> ((a, a') -> (c, c'))
 #'
@@ -68,9 +77,7 @@ selectBy  <- function(p) { return(function(x) { x %select% p }) }
 #' @references Haskell's Control.Arrow
 #' @return A function of arity one, whith an argument that must be a pair, that returns a pair. r((a,b)) = (f(a), g(b))
 #' @export
-'%***%' <- function(f, g) {
-	return(function(arg) { list(fst= f(arg$fst), snd=g(arg$snd)) })
-}
+'%***%' <- function(f, g) {return(function(arg) {pair( f(arg$fst), g(arg$snd))}}
 
 #' Generates function that takes a pair as argument
 #'
@@ -88,8 +95,8 @@ LTE <- function(i) { function(x) { x<=i} }
 
 #' convinient functional version of !
 #'
-#' @param i the argument to !
-#' @return !i
+#' @param i the argument to `!`
+#' @return `!i`
 #' @export
 NOT <- function(i) { !i }
 
